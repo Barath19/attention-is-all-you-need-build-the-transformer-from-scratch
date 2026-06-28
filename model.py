@@ -11,16 +11,19 @@ def build_token_to_id_vocab(sentences, specials=('<pad>', '<bos>', '<eos>', '<un
     # TODO: build a token-to-id dict with specials first, then corpus tokens in first-seen order.
     vocab = {}
 
-    for tok in specials:
-        if tok not in vocab:
-            vocab[tok] = len(vocab)
+    #first add the special token to the vocab
 
+    for token in specials:
+        if token not in vocab:
+            vocab[token] = len(vocab)
+    
     for sentence in sentences:
         tokens = sentence.split() if isinstance(sentence, str) else sentence
-        for tok in tokens:
-            if tok not in vocab:
-                vocab[tok] = len(vocab)
-    
+
+        for token in tokens:
+            if token not in vocab:
+                vocab[token] = len(vocab)
+
     return vocab
 
 # Step 2 - build_id_to_token_vocab (not yet solved)
